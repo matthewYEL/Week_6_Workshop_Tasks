@@ -44,7 +44,15 @@ void insert_node(struct node** treePtr, int data);
 void inOrder(struct node* treePtr);
 void delete_tree(struct node** treePtr);
 
-int main() {
+int main(int argc, char*argv[]) {
+	char* tokenPtr = NULL;
+	struct node* treePtr = NULL;
+
+	tokenPtr = strtok(argv[1],",");
+	while(tokenPtr != NULL){
+		
+	}
+
 	int temp = 0;
 	struct node* treePtr = NULL;
     printf("Enter the value of the new data member: ");
@@ -99,7 +107,12 @@ void inOrder(struct node* treePtr)
 
 void delete_tree(struct node** treePtr)
 {
-       free(*treePtr);
-	   delete_tree(&((*treePtr)->leftPtr));
-       delete_tree(&((*treePtr)->rightPtr));
+
+	if(*treePtr != NULL) // if the node exists
+	{
+		delete_tree(&((*treePtr)->leftPtr)); // look left
+		delete_tree(&((*treePtr)->rightPtr)); // look right
+		free(*treePtr); // visit
+		(*treePtr) = NULL; // inform the tree about node deletion
+	}
 }
